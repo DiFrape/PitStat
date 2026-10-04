@@ -21,6 +21,7 @@ This document defines the project vision, architectural standards, and the opera
 
 2. **No Autonomous Initiatives**:
    - The agent must **NEVER make unilateral architectural decisions**, create unrequested structural files, or install unapproved dependencies.
+   - **Strict Specifications & No Speculative Aliases**: Stick strictly to canonical, explicitly defined parameter names, endpoints, and interfaces. Never introduce unrequested shorthand aliases, informal abbreviations, or unsolicited convenience behaviors without explicit developer approval.
    - When facing technical trade-offs or design choices, the agent must **only formulate clear, reasoned proposals with pros and cons**, waiting for explicit developer approval before implementing changes.
 
 3. **Core Scope of Assistance**:
