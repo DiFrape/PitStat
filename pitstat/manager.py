@@ -4,12 +4,13 @@ import pandas as pd
 from .base import BaseAPI
 from .openf1 import OpenF1API
 from .f1api import F1APIDev, F1ConnectAPI
+from .jolpica import JolpicaAPI
 
 
 class F1APIManager:
     """
     Unified manager and facade for all Formula 1 API providers.
-    Coordinates requests across OpenF1, F1API.dev, and F1ConnectAPI,
+    Coordinates requests across OpenF1, F1API.dev, F1ConnectAPI, and JolpicaAPI,
     and supports dynamic registration of new API clients.
     """
 
@@ -18,16 +19,19 @@ class F1APIManager:
         openf1_client: Optional[OpenF1API] = None,
         f1api_dev_client: Optional[F1APIDev] = None,
         f1connect_client: Optional[F1ConnectAPI] = None,
+        jolpica_client: Optional[JolpicaAPI] = None,
     ) -> None:
         self.openf1 = openf1_client or OpenF1API()
         self.f1api_dev = f1api_dev_client or F1APIDev()
         self.f1connect = f1connect_client or F1ConnectAPI()
+        self.jolpica = jolpica_client or JolpicaAPI()
 
         self._clients: Dict[str, BaseAPI] = {
             "openf1": self.openf1,
             "open": self.openf1,
             "f1apidev": self.f1api_dev,
             "f1connect": self.f1connect,
+            "jolpica": self.jolpica,
         }
 
     def register_client(self, name: str, client: BaseAPI) -> None:
@@ -68,13 +72,16 @@ class F1APIManager:
         :param endpoint: Target endpoint path (e.g., 'sessions', 'current/drivers', '2024/1/race').
         :param params: Optional query parameters dictionary or string.
         :param api: API provider selector: 'openf1' (default), 'f1api' (auto-routes f1api.dev/f1connect),
-                    'f1connect', or any custom registered provider name.
+                    'f1connect', 'jolpica', or any custom registered provider name.
         :return: Normalized pandas DataFrame.
         """
         api_norm = api.lower().strip().replace("-", "").replace("_", "")
 
         if api_norm == "openf1":
             return self.openf1.get_data(endpoint=endpoint, params=params)
+
+        if api_norm == "jolpica":
+            return self.jolpica.get_data(endpoint=endpoint, params=params)
 
         if api_norm == "f1api":
             # Route between F1APIDev and F1ConnectAPI based on endpoint rules
@@ -96,6 +103,6 @@ class F1APIManager:
             return self._clients[api_norm].get_data(endpoint=endpoint, params=params)
 
         raise ValueError(
-            f"Unknown API provider '{api}'. Supported values include: 'openf1', 'f1api', 'f1connect', "
+            f"Unknown API provider '{api}'. Supported values include: 'openf1', 'f1api', 'f1connect', 'jolpica', "
             f"or any registered custom provider."
         )
