@@ -31,5 +31,11 @@ Desktop.ini
 *.swo
 *.code-workspace
 
+# Build and Distribution artifacts
+build/
+dist/
+*.egg-info/
+.eggs/
+
 # Ignore *.ipynb files in the project root directory
 *.ipynb

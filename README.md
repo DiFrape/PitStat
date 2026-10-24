@@ -66,7 +66,41 @@ python -m venv .venv
 .venv\Scripts\Activate.ps1
 ```
 
-### 3. Install Required Dependencies
+### 3. Install the Library & Dependencies
+
+You can install PitStat directly in your environment using `pip`:
+
+**Direct installation from GitHub:**
+
+```bash
+pip install git+https://github.com/DiFrape/PitStat.git
+```
+
+**Direct installation with notebook support:**
+
+```bash
+pip install "pitstat[notebook] @ git+https://github.com/DiFrape/PitStat.git"
+```
+
+**Local standard installation (from cloned directory):**
+
+```bash
+pip install .
+```
+
+**Local development (editable mode):**
+
+```bash
+pip install -e .
+```
+
+**Local installation with optional Jupyter notebook support:**
+
+```bash
+pip install ".[notebook]"
+```
+
+Alternatively, you can install dependencies using `requirements.txt`:
 
 ```bash
 pip install -r requirements.txt

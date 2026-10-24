@@ -1,0 +1,36 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pitstat"
+version = "0.1.0"
+description = "A clean, modular, and extensible Python library and analysis toolkit for Formula 1 data from free public APIs."
+readme = "README.md"
+requires-python = ">=3.9"
+license = "MIT"
+authors = [{ name = "DiFrape" }]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Operating System :: OS Independent",
+    "Topic :: Scientific/Engineering :: Information Analysis",
+]
+dependencies = ["pandas>=2.0.0"]
+
+[project.optional-dependencies]
+notebook = ["ipykernel>=6.20.0", "notebook>=7.0.0"]
+dev = ["pytest", "ruff"]
+
+[project.urls]
+Homepage = "https://github.com/DiFrape/PitStat"
+Documentation = "https://github.com/DiFrape/PitStat/wiki"
+Repository = "https://github.com/DiFrape/PitStat.git"
+Issues = "https://github.com/DiFrape/PitStat/issues"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["pitstat*"]

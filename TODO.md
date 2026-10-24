@@ -58,9 +58,3 @@ CREATE INDEX IF NOT EXISTS idx_cache_expires_at ON api_cache(expires_at);
   - [ ] Verify `refresh=True` bypasses cache and updates stored entries.
   - [ ] Verify past seasons receive no expiration date and current season receives 24h TTL.
   - [ ] Verify `clear_cache` selectively removes matching entries.
-
-## Check the validation of Wiki content
-Check for every page of the Wiki content if the content is still valid and up to date. Update the content if needed.
-
-## Look for the working system of `jolpica` APIs
-Check the way the API is used in the class and confront it with the documentation.
